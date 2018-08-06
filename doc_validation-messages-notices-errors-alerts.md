@@ -60,14 +60,13 @@ starts in javascript, ends in javascript
  * `views / manage / manage accounts`
 
 ### ERROR DISPLAY
-flash-messages
-flash_error
-flash_alert
-flash_notice (success)
-flash_guidance (user guidelines)
+ * `flash-messages`
+ * `flash_error`
+ * `flash_alert`
+ * `flash_notice (success)`
+ * `flash_guidance (user guidelines)`
 
-phrasing of error/success messages
-
+ * `phrasing of error/success messages`
 
 ---
 
@@ -110,10 +109,10 @@ theglassfiles_com/app/assets/stylesheets/application.css.scss
 
 ### TYPE 2:
 
-```
-label_errors => true
-inline_errors => true
+**label_errors => true**  
+**inline_errors => true**
 
+```
 validation errors
 theglassfiles_com/config/locales/en.yml
 
@@ -214,9 +213,9 @@ theglassfiles_com/app/views/devise/sessions/new.html.haml
 ---
 
 
-###TYPE 3:
+### TYPE 3:
 
-starts in javascript, ends in javascript
+**starts in javascript, ends in javascript**
 
 ```
 theglassfiles_com/app/assets/javascripts/create_images.js
@@ -263,7 +262,7 @@ theglassfiles_com/app/assets/javascripts/create_images.js
 ---
 
 
-###TYPE 4:
+### TYPE 4:
 
 `stripe / create group / payment form`
 
