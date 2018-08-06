@@ -43,21 +43,21 @@ inline_errors => true
 starts in javascript, ends in javascript
 
 ### TYPE 4:
-stripe / create group / payment form
+`stripe / create group / payment form`
 
 ### SUCCESS AND NOTICE DISPLAY
- -assets / javascripts / manage
- -assets / javascripts / create_groups
- -controllers / users / registrations
- -controllers / media_items
- -controllers / accounts
- -controllers / groups
- -controllers / images
- -controllers / writings
- -views / browse / index
- -views / manage / manage families
- -views / manage / manage items
- -views / manage / manage accounts
+ * `assets / javascripts / manage`
+ * `assets / javascripts / create_groups`
+ * `controllers / users / registrations`
+ * `controllers / media_items`
+ * `controllers / accounts`
+ * `controllers / groups`
+ * `controllers / images`
+ * `controllers / writings`
+ * `views / browse / index`
+ * `views / manage / manage families`
+ * `views / manage / manage items`
+ * `views / manage / manage accounts`
 
 ### ERROR DISPLAY
 flash-messages
@@ -76,12 +76,11 @@ phrasing of error/success messages
 
 **messages**
 
-
-`theglassfiles_com/app/assets/stylesheets/application.css.scss`
+```
+theglassfiles_com/app/assets/stylesheets/application.css.scss
 
 // message, notice, error display
 
-```
 #flash_success {
   margin: 70px 15px 0 15px;
   text-align: center;
@@ -109,12 +108,12 @@ phrasing of error/success messages
 ---
 
 
-#### TYPE 2:
+### TYPE 2:
 
+```
 label_errors => true
 inline_errors => true
 
-```
 validation errors
 theglassfiles_com/config/locales/en.yml
 
@@ -212,7 +211,7 @@ theglassfiles_com/app/views/devise/sessions/new.html.haml
     /= @user.errors.full_messages                
 ```
 
-==============================================
+---
 
 
 ###TYPE 3:
@@ -261,7 +260,7 @@ theglassfiles_com/app/assets/javascripts/create_images.js
     }
 ```
 
-==============================================
+---
 
 
 ###TYPE 4:
