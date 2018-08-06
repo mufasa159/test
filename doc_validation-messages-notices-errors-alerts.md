@@ -76,19 +76,20 @@ Starts in javascript, ends in javascript
 
 **Messages**
 
-```
-theglassfiles_com/app/assets/stylesheets/application.css.scss
+`theglassfiles_com/app/assets/stylesheets/application.css.scss`
+
 
 // message, notice, error display
 
-#flash_success {
+```#flash_success {
   margin: 70px 15px 0 15px;
   text-align: center;
   background-color: $green-dark_color;
   color: $white_color;
   font-size: 30px;
 }
-
+```
+```
 #flash_notice {
   margin: 70px 0 0 0;
   text-align: center;
@@ -96,7 +97,8 @@ theglassfiles_com/app/assets/stylesheets/application.css.scss
   color: $white_color;
   font-size: 30px;
 }
-
+```
+```
 #flash_alert {
   margin: 70px 0 0 0;
   text-align: center;
@@ -113,11 +115,10 @@ theglassfiles_com/app/assets/stylesheets/application.css.scss
 **label_errors => true**  
 **inline_errors => true**
 
-```
-validation errors
-theglassfiles_com/config/locales/en.yml
+**validation errors**
+`theglassfiles_com/config/locales/en.yml`
 
-en:
+```en:
   activerecord:
     errors:
       models:
@@ -132,11 +133,12 @@ en:
               blank: "is required "
             password_confirmation:
               blank: "is required "
+```
 
-devise errors
-theglassfiles_com/config/locales/devise.en.yml
+**devise errors**
+`theglassfiles_com/config/locales/devise.en.yml`
 
-theglassfiles_com/app/views/devise/registrations/new.html.haml
+```theglassfiles_com/app/views/devise/registrations/new.html.haml
 
  = bootstrap_form_for(resource,
                      :as => resource_name,
@@ -144,9 +146,9 @@ theglassfiles_com/app/views/devise/registrations/new.html.haml
                      :html => { :class => 'form-vertical' },
                      :label_errors => true) do |f| 
 
-
-theglassfiles_com/app/controllers/users/registrations_controller.rb
-
+```
+`theglassfiles_com/app/controllers/users/registrations_controller.rb`
+```
 def update_email
   
   if @user.errors.any?
@@ -162,7 +164,8 @@ def update_email
   end
   
 end
-
+```
+```
 def update_password
 
   if @user.errors.any?
@@ -175,18 +178,18 @@ def update_password
 
   end
 end
+```
 
-
-theglassfiles_com/app/models/user.rb
-
+`theglassfiles_com/app/models/user.rb`
+```
 validates_presence_of :name_first
 #                     :password_confirmation
 #                     :subdomain
+```
 
+`theglassfiles_com/app/views/devise/sessions/new.html.haml`
 
-theglassfiles_com/app/views/devise/sessions/new.html.haml
-
-= bootstrap_form_for(resource,
+```= bootstrap_form_for(resource,
                     :as => resource_name,
                     :url => session_path(resource_name),
                     :html => {:class => 'form-vertical' },
