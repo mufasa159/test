@@ -1,4 +1,4 @@
-## ideally:
+### ideally:
 
 
 ### 1.
@@ -32,20 +32,20 @@ when a user performs that action
 ---
 
 
-## TYPE 1:
+#### TYPE 1:
 messages
 
-## TYPE 2:
+#### TYPE 2:
 label_errors => true  
 inline_errors => true
 
-## TYPE 3:
+#### TYPE 3:
 starts in javascript, ends in javascript
 
-## TYPE 4:
+#### TYPE 4:
 stripe / create group / payment form
 
-## SUCCESS AND NOTICE DISPLAY
+#### SUCCESS AND NOTICE DISPLAY
 assets / javascripts / manage
 assets / javascripts / create_groups
 controllers / users / registrations
@@ -59,7 +59,7 @@ views / manage / manage families
 views / manage / manage items
 views / manage / manage accounts
 
-## ERROR DISPLAY
+#### ERROR DISPLAY
 flash-messages
 flash_error
 flash_alert
@@ -72,7 +72,7 @@ phrasing of error/success messages
 ---
 
 
-## TYPE 1:
+#### TYPE 1:
 
 **messages**
 
@@ -109,7 +109,7 @@ phrasing of error/success messages
 ---
 
 
-## TYPE 2:
+#### TYPE 2:
 
 label_errors => true
 inline_errors => true
@@ -215,7 +215,7 @@ theglassfiles_com/app/views/devise/sessions/new.html.haml
 ==============================================
 
 
-##TYPE 3:
+###TYPE 3:
 
 starts in javascript, ends in javascript
 
@@ -264,7 +264,7 @@ theglassfiles_com/app/assets/javascripts/create_images.js
 ==============================================
 
 
-##TYPE 4:
+###TYPE 4:
 
 `stripe / create group / payment form`
 
