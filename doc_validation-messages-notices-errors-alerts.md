@@ -729,7 +729,6 @@ destroy
 
 ```
 .flash_message
-```
 
 #flash_notice
 You haven't created any media items yet. <a href="#{create_items_landing_url}">Create your first item now</a>!
@@ -739,7 +738,7 @@ No one has shared items with this family yet. <a href="#{manage_items_group_id_p
 
 #flash_guidance
 Click or tap a circle to see items shared by members of that group.
-
+```
 
 =============================
 
@@ -760,14 +759,13 @@ Click or tap a circle to see items shared by members of that group.
 
 ```
 .flash_message
-```
 
 #flash_notice
 You have not yet created or joined families. <a href="#{create_families_url}">Create a family today</a>!
 
 #flash_guidance
 Each circle represents a group you're a part of.
-
+```
 
 =============================
 
@@ -776,14 +774,13 @@ Each circle represents a group you're a part of.
 
 ```
 .flash_message
-```
 
 #flash_notice
 You haven't created any media items yet. <a href="#{create_items_landing_url}">Create your first item now</a>!
 
 #flash_guidance
 Click or tap a circle to see items you can manage in that group.
-
+```
 
 =============================
 
@@ -792,20 +789,20 @@ Click or tap a circle to see items you can manage in that group.
 
 ```
 .flash_message
-```
 
 #flash_guidance
 Administer your personal account and the groups you've created.
-
+```
 
 ==============================================
 
-
+```
 ----
 
 ERROR DISPLAY
 
 ----
+```
 
 flash-messages
 
