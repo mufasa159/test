@@ -81,7 +81,8 @@ Starts in javascript, ends in javascript
 
 // message, notice, error display
 
-```#flash_success {
+```
+#flash_success {
   margin: 70px 15px 0 15px;
   text-align: center;
   background-color: $green-dark_color;
@@ -115,10 +116,10 @@ Starts in javascript, ends in javascript
 **label_errors => true**  
 **inline_errors => true**
 
-**validation errors**
+**Validation errors**
 `theglassfiles_com/config/locales/en.yml`
 
-```en:
+``` en:
   activerecord:
     errors:
       models:
@@ -133,23 +134,25 @@ Starts in javascript, ends in javascript
               blank: "is required "
             password_confirmation:
               blank: "is required "
+              
 ```
 
-**devise errors**
+**Devise errors**
 `theglassfiles_com/config/locales/devise.en.yml`
 
-```theglassfiles_com/app/views/devise/registrations/new.html.haml
+`theglassfiles_com/app/views/devise/registrations/new.html.haml`
 
- = bootstrap_form_for(resource,
+``` = bootstrap_form_for(resource,
                      :as => resource_name,
                      :url => registration_path(resource_name),
                      :html => { :class => 'form-vertical' },
                      :label_errors => true) do |f| 
 
 ```
+
 `theglassfiles_com/app/controllers/users/registrations_controller.rb`
-```
-def update_email
+
+``` def update_email
   
   if @user.errors.any?
       
