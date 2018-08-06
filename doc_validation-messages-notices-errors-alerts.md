@@ -485,55 +485,73 @@ update_password
 
 =============================
 
+`controllers / media_items`
 
-controllers / media_items
-
+```
 create
       flash[:success] = 'Your media item is now saved in your library.'
+```
 
+```
 update
       flash[:success] = 'You successfully updated the details of your media item.'
+```
 
+```
 destroy
       flash[:success] = 'You have deleted the media item you selected.'
-
+```
 
 =============================
 
 
-controllers / accounts
-
+`controllers / accounts`
+```
 create
       flash[:success] = 'You created your Family account successfully!'
+```
 
+```
 update
       flash[:success] = 'You updated your Family account successfully.'
+```
 
+```
 destroy
       flash[:success] = 'You deleted a Family account. Would you like to create a new one?'
+```
 
+```
 update_payment_card
       flash[:success] = 'Your updated credit card information is approved.'
+```
 
+```
 update_user_password
       flash[:success] = 'Your password was changed successfully.'
+```
 
+```
 update_user_email
       flash[:success] = 'Your email address was changed successfully.'
+```
 
+```
 update_group_name_town
       flash[:success] = 'You changed your Family account information successfully.'
+```
 
+```
 update_user_name_town
       flash[:success] = 'You changed your Personal account information successfully.'
-
+```
 
 =============================
 
 
-controllers / groups
+`controllers / groups`
 
-
+```
 grant_group_role
 
       if group.add(member, as: role)
@@ -541,8 +559,9 @@ grant_group_role
       else  
         format.html {render nothing: true, notice: "We were not able to fulfill your request. Please notify us of this issue by emailing customerservice@theglassfiles.com"}
       end
+```
 
-
+```
 revoke_group_role
 
       if group.users.delete(member, as: role) 
@@ -550,8 +569,9 @@ revoke_group_role
       else  
         format.html {render nothing: true, notice: "We were not able to fulfill your request. Please notify us of this issue by emailing customerservice@theglassfiles.com"}
       end
+```
 
-
+```
 remove_group_user
 
       if group.users.delete(member)
@@ -566,8 +586,9 @@ remove_group_user
       else
         format.html {redirect_to "/manage/families", alert: "We were not able to fulfill your request. Please notify us of this issue by emailing customerservice@theglassfiles.com"}
       end
+```
 
-
+```
 create
 
     respond_to do |format|      
@@ -576,8 +597,9 @@ create
 
       format.html {redirect_to manage_families_dynamic_path(@account.group.id, "invite_members", ""), success: 'You created your Family group successfully.'}
     end
+```
 
-
+```
 manage_families
 
     if @form == "view_members"      
@@ -593,33 +615,35 @@ manage_families
         end        
       end
     elsif @form == "invite_members"
-
+```
 
 =============================
 
 
-controllers / browse
+`controllers / browse`
 
-
+```
 tag
 
       flash[:notice] = "There are no items with the tag you selected."
-
+```
 
 =============================
 
 
-controllers / images
+`controllers / images`
 
-
+```
 create
       flash[:success] = 'Your media item is now saved in your library.'
+```
 
-
+```
 update
       flash[:success] = 'You successfully updated the details of your media item.'
+```
 
-
+```
 historian_update_sharings
 
       if in_group && !@image.in_group?(group)
@@ -635,8 +659,9 @@ historian_update_sharings
         flash[:alert] = "We were not able to fulfill your request. Please notify us of this issue by emailing <a href='mailto:customerservice@theglassfiles.com'>customerservice@theglassfiles.com</a>"
         format.html { render nothing: true }
       end
+```
 
-
+```
 destroy
 
     if @image.destroy then
@@ -651,22 +676,24 @@ destroy
         format.json { head :no_content }
       end
     end
-
+```
 
 =============================
 
 
-controllers / writings
+`controllers / writings`
 
-
+```
 create
       flash[:success] = 'Your media item is now saved in your library.'
+```
 
-
+```
 update
       flash[:success] = 'You successfully updated the details of your media item.'
+```
 
-
+```
 historian_update_sharings
 
       if in_group && !@writing.in_group?(group)
@@ -682,8 +709,9 @@ historian_update_sharings
         flash[:alert] = "We were not able to fulfill your request. Please notify us of this issue by emailing <a href='mailto:customerservice@theglassfiles.com'>customerservice@theglassfiles.com</a>"
         format.html { render nothing: true }
       end
+```
 
-
+```
 destroy
 
     @writing.destroy
@@ -692,14 +720,16 @@ destroy
       format.html { redirect_to writings_url, success: 'You have deleted the media item you selected.' }
       format.json { head :no_content }
     end
-
+```
 
 =============================
 
 
-views / browse / index
+`views / browse / index`
 
+```
 .flash_message
+```
 
 #flash_notice
 You haven't created any media items yet. <a href="#{create_items_landing_url}">Create your first item now</a>!
@@ -714,19 +744,23 @@ Click or tap a circle to see items shared by members of that group.
 =============================
 
 
-views / browse / tag
+`views / browse / tag`
 
+
+```
 .container
     .flash_message{:id => "flash_notice"}
         These items have the '#{@tag_name}' tag.
-
+```
 
 =============================
 
 
-views / manage / manage families
+`views / manage / manage families`
 
+```
 .flash_message
+```
 
 #flash_notice
 You have not yet created or joined families. <a href="#{create_families_url}">Create a family today</a>!
@@ -738,9 +772,11 @@ Each circle represents a group you're a part of.
 =============================
 
 
-views / manage / manage items
+`views / manage / manage items`
 
+```
 .flash_message
+```
 
 #flash_notice
 You haven't created any media items yet. <a href="#{create_items_landing_url}">Create your first item now</a>!
@@ -752,9 +788,11 @@ Click or tap a circle to see items you can manage in that group.
 =============================
 
 
-views / manage / manage accounts
+`views / manage / manage accounts`
 
+```
 .flash_message
+```
 
 #flash_guidance
 Administer your personal account and the groups you've created.
@@ -781,17 +819,21 @@ flash_guidance (user guidelines)
 
 ----
 
+
+
+```
 views with messages displayed by rendering 'layouts/display_messages' 
   devise/sessions/new.html.haml
   devise/registrations/edit_email.html.haml
   devise/registrations/edit_password.html.haml
+```
 
 ----
 
-groups/new
+`groups/new`
   
 Within
-groups/new
+`groups/new`
 is a Stripe form to create an account.
   
 This form's error messages are controlled by Stripe javascript.
@@ -799,7 +841,8 @@ This form's error messages are controlled by Stripe javascript.
 ----
 
 For the following forms, some error messages are generated by a javascript file and others are called by the controllers.
-  
+
+```  
   media_items/new
   media_items/update
   media_items/destroy
@@ -815,40 +858,40 @@ For the following forms, some error messages are generated by a javascript file 
   writings/new
   writings/update
   writings/destroy
-
+```
 ----
-
+```
 Views with rails-generated errors on the form, which can be overridden by en.yml
   devise/passwords/new.html.haml
   devise/passwords/edit.html.haml
   devise/registrations/edit.html.haml
-
+```
 ----
 
 not logged in:
 
 register
-app/views/devise/registrations/new.html.haml
+`app/views/devise/registrations/new.html.haml`
 
 reset password + reset password url (2 step process)
-app/views/devise/passwords/new.html.haml
-app/views/devise/passwords/edit.html.haml
+`app/views/devise/passwords/new.html.haml`
+`app/views/devise/passwords/edit.html.haml`
 
 login
-app/views/devise/sessions/new.html.haml
+`app/views/devise/sessions/new.html.haml`
 
 ----
 
 logged in:
 
-payment (create group/family)
+Payment (`create group/family`)
 TODO
 
-change password
-app/views/devise/registrations/_edit_password.html.haml
+Change password
+`app/views/devise/registrations/_edit_password.html.haml`
 
-change email address
-app/views/devise/registrations/_edit_email.html.haml
+Change email address
+`app/views/devise/registrations/_edit_email.html.haml`
 
 
 ==============================================
@@ -870,7 +913,7 @@ phrasing of error messages
 
 simpleform validation
 
-config/locales/simple_form.en.yml
+`config/locales/simple_form.en.yml`
 
 ```
 ----
