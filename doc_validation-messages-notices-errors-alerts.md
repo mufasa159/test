@@ -77,7 +77,9 @@ Starts in javascript, ends in javascript
 
 `theglassfiles_com/app/assets/stylesheets/application.css.scss`
 
+```
 // message, notice, error display
+```
 
 ```
 #flash_success {
@@ -802,7 +804,6 @@ Administer your personal account and the groups you've created.
 ERROR DISPLAY
 
 ----
-```
 
 flash-messages
 
@@ -815,7 +816,7 @@ flash_notice (success)
 flash_guidance (user guidelines)
 
 ----
-
+```
 
 
 ```
@@ -911,6 +912,4 @@ phrasing of error messages
 simpleform validation
 
 `config/locales/simple_form.en.yml`
-
-```
 ----
