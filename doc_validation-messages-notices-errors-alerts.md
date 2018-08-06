@@ -138,7 +138,7 @@ en:
 ```
 
 **Devise errors**
-`theglassfiles_com/config/locales/devise.en.yml`
+`theglassfiles_com/config/locales/devise.en.yml`  
 
 `theglassfiles_com/app/views/devise/registrations/new.html.haml`
 
@@ -150,7 +150,7 @@ en:
                      :label_errors => true) do |f| 
 
 ```
-
+  
 `theglassfiles_com/app/controllers/users/registrations_controller.rb`
 
 ``` 
@@ -185,7 +185,7 @@ def update_password
   end
 end
 ```
-
+  
 `theglassfiles_com/app/models/user.rb`
 
 ```
@@ -193,7 +193,7 @@ validates_presence_of :name_first
 #                     :password_confirmation
 #                     :subdomain
 ```
-
+  
 `theglassfiles_com/app/views/devise/sessions/new.html.haml`
 
 ``` 
