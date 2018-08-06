@@ -1,7 +1,7 @@
-##ideally:
+## ideally:
 
 
-###1.
+### 1.
 errors are always written in
 `/config/locales/en.yml`
 and
@@ -15,7 +15,7 @@ for the analytics environment variable, we take something from ruby and insert i
 which would enable us to take errors from i18n, and use them in js
 
 
-###2.
+### 2.
 user feedback messages and possibly certain errors, are always in one of two places on the front-end:
  - in line with form field labels (through bootstrap)
  - in a container at the top of the page (through haml/css)
@@ -32,20 +32,20 @@ when a user performs that action
 ---
 
 
-##TYPE 1:
+## TYPE 1:
 messages
 
-##TYPE 2:
+## TYPE 2:
 label_errors => true  
 inline_errors => true
 
-##TYPE 3:
+## TYPE 3:
 starts in javascript, ends in javascript
 
-##TYPE 4:
+## TYPE 4:
 stripe / create group / payment form
 
-##SUCCESS AND NOTICE DISPLAY
+## SUCCESS AND NOTICE DISPLAY
 assets / javascripts / manage
 assets / javascripts / create_groups
 controllers / users / registrations
@@ -59,7 +59,7 @@ views / manage / manage families
 views / manage / manage items
 views / manage / manage accounts
 
-##ERROR DISPLAY
+## ERROR DISPLAY
 flash-messages
 flash_error
 flash_alert
@@ -72,7 +72,7 @@ phrasing of error/success messages
 ---
 
 
-##TYPE 1:
+## TYPE 1:
 
 **messages**
 
@@ -109,7 +109,7 @@ phrasing of error/success messages
 ---
 
 
-##TYPE 2:
+## TYPE 2:
 
 label_errors => true
 inline_errors => true
