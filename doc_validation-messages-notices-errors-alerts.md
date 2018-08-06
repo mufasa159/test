@@ -464,10 +464,10 @@ function handle_delete_item(item_id, html_url)
 
 
 `assets / javascripts / create_groups`
-
+```
   show_error = function (message) {
     $("#flash-messages").html('<div id="flash_alert" style="margin-bottom: 60px;">' + 'All entries must be accurate.' + '</div>');
-
+```
 
 =============================
 
@@ -910,6 +910,7 @@ http://guides.rubyonrails.org/i18n.html
 phrasing of error messages
 
 simpleform validation
-
 `config/locales/simple_form.en.yml`
+
+
 ----
