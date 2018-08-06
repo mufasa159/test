@@ -229,9 +229,9 @@ validates_presence_of :name_first
 
 **Starts in javascript, ends in javascript**
 
-```
-theglassfiles_com/app/assets/javascripts/create_images.js
+`theglassfiles_com/app/assets/javascripts/create_images.js`
 
+```
   function display_error(label_for, error_text) {
     var label = $("[for='"+label_for+"']");
     var error_message = label.text().split(" - ")[0] + " - " + error_text;
@@ -278,10 +278,9 @@ theglassfiles_com/app/assets/javascripts/create_images.js
 
 `stripe / create group / payment form`
 
+`theglassfiles_com/app/views/groups/new.html.haml`
+
 ```
-theglassfiles_com/app/views/groups/new.html.haml
-
-
 = bootstrap_nested_form_for(@account, url: groups_path(@group), id: 'new_account') do |f|        
   
   = f.fields_for :group, Group.new do |g|
@@ -293,11 +292,11 @@ theglassfiles_com/app/views/groups/new.html.haml
 
 
 #flash-messages
+```
 
+`theglassfiles_com/app/assets/javascripts/form.js`
 
-theglassfiles_com/app/assets/javascripts/form.js
-
-
+```
 line 61:
 
 show_error = function (message) {
@@ -315,39 +314,44 @@ show_error = function (message) {
    
   return false;
 };
+```
 
-
+```
 line 140:
 
 show_error = function (message) {
   $("#flash-messages").html('<div class="alert-alert"><a data-dismiss="alert">×</a><div id="flash_alert">' + message + '</div></div>');
   return false;
 };
+```
 
-
+```
 ==============================================
 
 SUCCESS AND NOTICE DISPLAY
 
 ==============================================
+```
 
-
-to render messages
+**To render messages**
 
 The partial
-  app/views/layouts/_messages.html.haml
+  `app/views/layouts/_messages.html.haml`
 can be used to display any flash messages you create.
 
+```
 .container
     .row
         .col-xs-12
              = render 'layouts/messages'
+```
 
 This partial appears below the header.
 
 It calls
-  app/views/layouts/_messages.erb
+  `app/views/layouts/_messages.erb`
 
+```
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %>">
     <a href="#" data-dismiss="alert" class="close">×</a>
@@ -360,22 +364,20 @@ It calls
 <%# clears the error so it doesn't appear on every subsequent page you go to %>
   <% flash.clear%>
 <% end %>
+```
 
 You can use
-  render 'layouts/_messages'
+  `render 'layouts/_messages'`
 anywhere in your view to display messages.
 
 In some cases, it is possible that there will be two flash messages displayed on the same page. In such cases, the display hierarchy is:
-1- the result of the action you just took
-2- the special case you find yourself in
+1. The result of the action you just took
+2. The special case you find yourself in
 
 
-=============================
+`assets / javascripts / manage`
 
-
-assets / javascripts / manage
-
-
+```
 var ERROR_EMAIL_INVALID       = "Email address is not a valid email address";
 
 
@@ -397,8 +399,9 @@ function handle_role_click(role_button, group_id, member_id, role) {
       }       
     }
 }
+```
 
-
+```
 function handle_remove_from_family_click(member_id, html_url) {  
 
   var r = confirm("Are you sure you want to proceed?");
@@ -410,8 +413,9 @@ function handle_remove_from_family_click(member_id, html_url) {
   }   
 
 }
+```
 
-
+```
 // handle leave family
 function handle_leave_family(leave_action, url, member_id, group_name) {
   var r = confirm("Are you sure you want to leave this Family?");
@@ -423,7 +427,9 @@ function handle_leave_family(leave_action, url, member_id, group_name) {
   } 
 
 }
+```
 
+```
 function leave_family_ajax(leave_action, url, member_id, group_name){
     notice = "You+have+left+the+"+group_name+"+Family."
 
@@ -434,8 +440,9 @@ function leave_family_ajax(leave_action, url, member_id, group_name){
 
     window.location = link
 }
+```
 
-
+```
 // delete item 
 function handle_delete_item(item_id, html_url)
 {
@@ -449,12 +456,12 @@ function handle_delete_item(item_id, html_url)
   } 
 
 }
-
+```
 
 =============================
 
 
-assets / javascripts / create_groups
+`assets / javascripts / create_groups`
 
   show_error = function (message) {
     $("#flash-messages").html('<div id="flash_alert" style="margin-bottom: 60px;">' + 'All entries must be accurate.' + '</div>');
@@ -462,15 +469,19 @@ assets / javascripts / create_groups
 
 =============================
 
-
+```
 controllers / users / registrations
+```
 
+```
 update_email
       flash[:success] = 'Your email address was changed successfully.'
+```
 
+```
 update_password
       flash[:success] = 'Your password was changed successfully.'
-
+```
 
 =============================
 
