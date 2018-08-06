@@ -73,11 +73,9 @@ Starts in javascript, ends in javascript
 
 
 #### TYPE 1:
-
 **Messages**
 
 `theglassfiles_com/app/assets/stylesheets/application.css.scss`
-
 
 // message, notice, error display
 
@@ -90,6 +88,7 @@ Starts in javascript, ends in javascript
   font-size: 30px;
 }
 ```
+
 ```
 #flash_notice {
   margin: 70px 0 0 0;
@@ -99,6 +98,7 @@ Starts in javascript, ends in javascript
   font-size: 30px;
 }
 ```
+
 ```
 #flash_alert {
   margin: 70px 0 0 0;
@@ -117,9 +117,10 @@ Starts in javascript, ends in javascript
 **inline_errors => true**
 
 **Validation errors**
-`theglassfiles_com/config/locales/en.yml`
+  `theglassfiles_com/config/locales/en.yml`
 
-``` en:
+```  
+en:
   activerecord:
     errors:
       models:
@@ -134,7 +135,6 @@ Starts in javascript, ends in javascript
               blank: "is required "
             password_confirmation:
               blank: "is required "
-              
 ```
 
 **Devise errors**
@@ -142,7 +142,8 @@ Starts in javascript, ends in javascript
 
 `theglassfiles_com/app/views/devise/registrations/new.html.haml`
 
-``` = bootstrap_form_for(resource,
+``` 
+= bootstrap_form_for(resource,
                      :as => resource_name,
                      :url => registration_path(resource_name),
                      :html => { :class => 'form-vertical' },
