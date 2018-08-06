@@ -153,7 +153,8 @@ en:
 
 `theglassfiles_com/app/controllers/users/registrations_controller.rb`
 
-``` def update_email
+``` 
+def update_email
   
   if @user.errors.any?
       
@@ -169,6 +170,7 @@ en:
   
 end
 ```
+
 ```
 def update_password
 
@@ -185,6 +187,7 @@ end
 ```
 
 `theglassfiles_com/app/models/user.rb`
+
 ```
 validates_presence_of :name_first
 #                     :password_confirmation
@@ -193,7 +196,8 @@ validates_presence_of :name_first
 
 `theglassfiles_com/app/views/devise/sessions/new.html.haml`
 
-```= bootstrap_form_for(resource,
+``` 
+= bootstrap_form_for(resource,
                     :as => resource_name,
                     :url => session_path(resource_name),
                     :html => {:class => 'form-vertical' },
