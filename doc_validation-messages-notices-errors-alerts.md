@@ -834,15 +834,15 @@ Change email address
 
 ---
 
-phrasing of error/success messages
-rails validation (register)
-http://guides.rubyonrails.org/i18n.html
+phrasing of error/success messages  
+rails validation (register)  
+http://guides.rubyonrails.org/i18n.html  
 
 ----
 
-{ legacy NYCNAK }
-phrasing of error messages
-simpleform validation
-`config/locales/simple_form.en.yml`
+{ legacy NYCNAK }  
+phrasing of error messages  
+simpleform validation  
+`config/locales/simple_form.en.yml`  
 
 ----
