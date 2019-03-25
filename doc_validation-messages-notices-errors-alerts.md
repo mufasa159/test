@@ -29,31 +29,7 @@ flash a message saying **Your item was removed from the Community,** when a user
 
 ---
 
-### SUCCESS AND NOTICE DISPLAY
- * `assets / javascripts / manage`
- * `assets / javascripts / create_groups`
- * `controllers / users / registrations`
- * `controllers / media_items`
- * `controllers / accounts`
- * `controllers / groups`
- * `controllers / images`
- * `controllers / writings`
- * `views / browse / index`
- * `views / manage / manage families`
- * `views / manage / manage items`
- * `views / manage / manage accounts`
-
-### ERROR DISPLAY
- * `flash-messages`
- * `flash_error`
- * `flash_alert`
- * `flash_notice (success)`
- * `flash_guidance (user guidelines)`
- * `phrasing of error/success messages`
-
----
-
-#### TYPE 1:
+### TYPE 1:
 >**Messages**
 
 `theglassfiles_com/app/assets/stylesheets/application.css.scss`
@@ -92,7 +68,7 @@ flash a message saying **Your item was removed from the Community,** when a user
 
 ---
 
-#### TYPE 2:
+### TYPE 2:
 >**label_errors => true**  
 **inline_errors => true**
 
@@ -202,7 +178,7 @@ validates_presence_of :name_first
 
 ---
 
-#### TYPE 3:
+### TYPE 3:
 >**Starts in javascript, ends in javascript**
 
 `theglassfiles_com/app/assets/javascripts/create_images.js`
@@ -307,19 +283,19 @@ show_error = function (message) {
 ```
 
 ---
-#### SUCCESS AND NOTICE DISPLAY
- * [`assets / javascripts / manage`](#)
- * `assets / javascripts / create_groups`
- * `controllers / users / registrations`
- * `controllers / media_items`
- * `controllers / accounts`
- * `controllers / groups`
- * `controllers / images`
- * `controllers / writings`
- * `views / browse / index`
- * `views / manage / manage families`
- * `views / manage / manage items`
- * `views / manage / manage accounts`
+### SUCCESS AND NOTICE DISPLAY
+ * [`assets / javascripts / manage`](#`assets-/-javascripts-/-manage`)
+ * [`assets / javascripts / create_groups`](#`assets-/-javascripts-/-create_groups`)
+ * [`controllers / users / registrations`]()
+ * [`controllers / media_items`]()
+ * [`controllers / accounts`]()
+ * [`controllers / groups`]()
+ * [`controllers / images`]()
+ * [`controllers / writings`]()
+ * [`views / browse / index`]()
+ * [`views / manage / manage families`]()
+ * [`views / manage / manage items`]()
+ * [`views / manage / manage accounts`]()
 
 **To Render Messages**
 The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
@@ -354,7 +330,7 @@ In some cases, it is possible that there will be two flash messages displayed on
 1. The result of the action you just took
 2. The special case you find yourself in
 
-`assets / javascripts / manage`
+###### `assets / javascripts / manage`
 
 ```
 var ERROR_EMAIL_INVALID       = "Email address is not a valid email address";
@@ -440,7 +416,7 @@ function handle_delete_item(item_id, html_url)
 =============================
 
 
-`assets / javascripts / create_groups`
+###### `assets / javascripts / create_groups`
 ```
   show_error = function (message) {
     $("#flash-messages").html('<div id="flash_alert" style="margin-bottom: 60px;">' + 'All entries must be accurate.' + '</div>');
@@ -448,7 +424,7 @@ function handle_delete_item(item_id, html_url)
 
 =============================
 
-`controllers / users / registrations`
+###### `controllers / users / registrations`
 
 ```
 update_email
@@ -462,7 +438,7 @@ update_password
 
 =============================
 
-`controllers / media_items`
+###### `controllers / media_items`
 
 ```
 create
@@ -482,7 +458,7 @@ destroy
 =============================
 
 
-`controllers / accounts`
+###### `controllers / accounts`
 ```
 create
       flash[:success] = 'You created your Family account successfully!'
@@ -526,7 +502,7 @@ update_user_name_town
 =============================
 
 
-`controllers / groups`
+###### `controllers / groups`
 
 ```
 grant_group_role
@@ -596,7 +572,7 @@ manage_families
 
 =============================
 
-`controllers / browse`
+###### `controllers / browse`
 
 ```
 tag
@@ -607,7 +583,7 @@ tag
 =============================
 
 
-`controllers / images`
+###### `controllers / images`
 
 ```
 create
@@ -657,7 +633,7 @@ destroy
 =============================
 
 
-`controllers / writings`
+###### `controllers / writings`
 
 ```
 create
@@ -701,7 +677,7 @@ destroy
 =============================
 
 
-`views / browse / index`
+###### `views / browse / index`
 
 ```
 .flash_message
@@ -719,7 +695,7 @@ Click or tap a circle to see items shared by members of that group.
 =============================
 
 
-`views / browse / tag`
+###### `views / browse / tag`
 
 
 ```
@@ -731,7 +707,7 @@ Click or tap a circle to see items shared by members of that group.
 =============================
 
 
-`views / manage / manage families`
+###### `views / manage / manage families`
 
 ```
 .flash_message
@@ -746,7 +722,7 @@ Each circle represents a group you're a part of.
 =============================
 
 
-`views / manage / manage items`
+###### `views / manage / manage items`
 
 ```
 .flash_message
@@ -761,7 +737,7 @@ Click or tap a circle to see items you can manage in that group.
 =============================
 
 
-`views / manage / manage accounts`
+###### `views / manage / manage accounts`  
 
 ```
 .flash_message
@@ -770,29 +746,18 @@ Click or tap a circle to see items you can manage in that group.
 Administer your personal account and the groups you've created.
 ```
 
-====================================================================================
+---
 
-```
-----
+### ERROR DISPLAY
+ * `flash-messages`
+ * `flash_error`
+ * `flash_alert`
+ * `flash_notice (success)`
+ * `flash_guidance (user guidelines)`
+ * `phrasing of error/success messages`  
 
-ERROR DISPLAY
-
-----
-
-flash-messages
-
-flash_error
-
-flash_alert
-
-flash_notice (success)
-
-flash_guidance (user guidelines)
-
-----
-```
-
-
+---
+  
 ```
 views with messages displayed by rendering 'layouts/display_messages' 
   devise/sessions/new.html.haml
