@@ -29,20 +29,6 @@ flash a message saying **Your item was removed from the Community,** when a user
 
 ---
 
-### TYPE 1
->Messages
-
-### TYPE 2
->label_errors => true  
-inline_errors => true
-
-### TYPE 3
->Starts in javascript
-Ends in javascript
-
-### TYPE 4
->`stripe / create group / payment form`
-
 ### SUCCESS AND NOTICE DISPLAY
  * `assets / javascripts / manage`
  * `assets / javascripts / create_groups`
