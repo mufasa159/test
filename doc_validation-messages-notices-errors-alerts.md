@@ -1,6 +1,7 @@
 ### Ideally:  
 ### 1.
 Errors are always written in `/config/locales/en.yml` and `/config/locales/devise.en.yml`  
+
 Always displayed through bootstrap.
 Except when the page requires `js` to work, in which case the errors can be written in the corresponding `js` file.
 For the analytics environment variable, we take something from ruby and insert it into a `js` variable which would enable us to take errors from `i18n`, and use them in `js`
@@ -18,8 +19,17 @@ An example of a user feedback message is on the **manage items** page:
 flash a message saying **Your item was removed from the Community,** when a user performs that action
 
 ---
+## Contents
+ * [TYPE 1](#type-1) 
+ * [TYPE 2](#type-2)
+ * [TYPE 3](#type-3)
+ * [TYPE 4](#type-4)
+ * [SUCCESS AND NOTICE DISPLAY](#success-and-notice-display)
+ * [ERROR DISPLAY](#error-display)
 
-### [TYPE 1](#Type-1)
+---
+
+### TYPE 1
 >Messages
 
 ### TYPE 2
@@ -57,7 +67,7 @@ Ends in javascript
 
 ---
 
-#### Type 1:
+#### TYPE 1:
 >**Messages**
 
 `theglassfiles_com/app/assets/stylesheets/application.css.scss`
@@ -311,14 +321,19 @@ show_error = function (message) {
 ```
 
 ---
-
-```
-==============================================
-
-          SUCCESS AND NOTICE DISPLAY
-
-==============================================
-```
+#### SUCCESS AND NOTICE DISPLAY
+ * [`assets / javascripts / manage`](#)
+ * `assets / javascripts / create_groups`
+ * `controllers / users / registrations`
+ * `controllers / media_items`
+ * `controllers / accounts`
+ * `controllers / groups`
+ * `controllers / images`
+ * `controllers / writings`
+ * `views / browse / index`
+ * `views / manage / manage families`
+ * `views / manage / manage items`
+ * `views / manage / manage accounts`
 
 **To Render Messages**
 The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
