@@ -284,8 +284,8 @@ show_error = function (message) {
 
 ---
 ### SUCCESS AND NOTICE DISPLAY
- * [`assets / javascripts / manage`](#assets-/-javascripts-/-manage)
- * [`assets / javascripts / create_groups`](#`assets-/-javascripts-/-create_groups`)
+ * [`assets / javascripts / manage`]()
+ * [`assets / javascripts / create_groups`]()
  * [`controllers / users / registrations`]()
  * [`controllers / media_items`]()
  * [`controllers / accounts`]()
@@ -297,8 +297,8 @@ show_error = function (message) {
  * [`views / manage / manage items`]()
  * [`views / manage / manage accounts`]()
 
-**To Render Messages**
-The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
+**To Render Messages**  
+  The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
 
 ```
 .container
@@ -330,7 +330,7 @@ In some cases, it is possible that there will be two flash messages displayed on
 1. The result of the action you just took
 2. The special case you find yourself in
 
-###### assets / javascripts / manage
+###### `assets / javascripts / manage`
 
 ```
 var ERROR_EMAIL_INVALID       = "Email address is not a valid email address";
