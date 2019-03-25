@@ -332,7 +332,7 @@ In some cases, it is possible that there will be two flash messages displayed on
 
 =============================
 
-`assets / javascripts / manage`
+###### `assets / javascripts / manage`
 
 ```
 var ERROR_EMAIL_INVALID       = "Email address is not a valid email address";
@@ -418,7 +418,7 @@ function handle_delete_item(item_id, html_url)
 =============================
 
 
-`assets / javascripts / create_groups`
+###### `assets / javascripts / create_groups`
 ```
   show_error = function (message) {
     $("#flash-messages").html('<div id="flash_alert" style="margin-bottom: 60px;">' + 'All entries must be accurate.' + '</div>');
@@ -426,7 +426,7 @@ function handle_delete_item(item_id, html_url)
 
 =============================
 
-`controllers / users / registrations`
+###### `controllers / users / registrations`
 
 ```
 update_email
@@ -440,7 +440,7 @@ update_password
 
 =============================
 
-`controllers / media_items`
+###### `controllers / media_items`
 
 ```
 create
@@ -460,7 +460,7 @@ destroy
 =============================
 
 
-`controllers / accounts`
+###### `controllers / accounts`
 ```
 create
       flash[:success] = 'You created your Family account successfully!'
@@ -504,7 +504,7 @@ update_user_name_town
 =============================
 
 
-`controllers / groups`
+###### `controllers / groups`
 
 ```
 grant_group_role
@@ -574,7 +574,7 @@ manage_families
 
 =============================
 
-`controllers / browse`
+###### `controllers / browse`
 
 ```
 tag
@@ -585,7 +585,7 @@ tag
 =============================
 
 
-`controllers / images`
+###### `controllers / images`
 
 ```
 create
@@ -635,7 +635,7 @@ destroy
 =============================
 
 
-`controllers / writings`
+###### `controllers / writings`
 
 ```
 create
@@ -679,7 +679,7 @@ destroy
 =============================
 
 
-`views / browse / index`
+###### `views / browse / index`
 
 ```
 .flash_message
@@ -697,7 +697,7 @@ Click or tap a circle to see items shared by members of that group.
 =============================
 
 
-`views / browse / tag`
+###### `views / browse / tag`
 
 
 ```
@@ -709,7 +709,7 @@ Click or tap a circle to see items shared by members of that group.
 =============================
 
 
-`views / manage / manage families`
+###### `views / manage / manage families`
 
 ```
 .flash_message
@@ -724,7 +724,7 @@ Each circle represents a group you're a part of.
 =============================
 
 
-`views / manage / manage items`
+###### `views / manage / manage items`
 
 ```
 .flash_message
@@ -739,7 +739,7 @@ Click or tap a circle to see items you can manage in that group.
 =============================
 
 
-`views / manage / manage accounts`  
+###### `views / manage / manage accounts`  
 
 ```
 .flash_message
