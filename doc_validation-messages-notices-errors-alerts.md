@@ -832,7 +832,7 @@ Change email address
 `app/views/devise/registrations/_edit_email.html.haml`
 
 
-==============================================
+---
 
 phrasing of error/success messages
 rails validation (register)
