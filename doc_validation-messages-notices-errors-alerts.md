@@ -808,28 +808,28 @@ Views with rails-generated errors on the form, which can be overridden by en.yml
 
 **Not Logged In:**
 
-register
-`app/views/devise/registrations/new.html.haml`
+register  
+`app/views/devise/registrations/new.html.haml`  
 
-reset password + reset password url (2 step process)
-`app/views/devise/passwords/new.html.haml`
-`app/views/devise/passwords/edit.html.haml`
-
-login
-`app/views/devise/sessions/new.html.haml`
+reset password + reset password url (2 step process)  
+`app/views/devise/passwords/new.html.haml`  
+`app/views/devise/passwords/edit.html.haml`  
+  
+login  
+`app/views/devise/sessions/new.html.haml`  
 
 ----
 
 **Logged In:**
 
-Payment (`create group/family`)
-TODO
+Payment (`create group/family`)  
+TODO  
 
-Change password
-`app/views/devise/registrations/_edit_password.html.haml`
+Change password  
+`app/views/devise/registrations/_edit_password.html.haml`  
 
-Change email address
-`app/views/devise/registrations/_edit_email.html.haml`
+Change email address  
+`app/views/devise/registrations/_edit_email.html.haml`  
 
 
 ---
