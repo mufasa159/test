@@ -284,7 +284,7 @@ show_error = function (message) {
 
 ---
 ### SUCCESS AND NOTICE DISPLAY
- * [`assets / javascripts / manage`](#`assets-/-javascripts-/-manage`)
+ * [`assets / javascripts / manage`](#assets-/-javascripts-/-manage)
  * [`assets / javascripts / create_groups`](#`assets-/-javascripts-/-create_groups`)
  * [`controllers / users / registrations`]()
  * [`controllers / media_items`]()
