@@ -19,7 +19,7 @@ flash a message saying **Your item was removed from the Community,** when a user
 
 ---
 
-### [TYPE 1](#TYPE-1)
+### [TYPE 1](#Type-1)
 >Messages
 
 ### TYPE 2
@@ -57,7 +57,7 @@ Ends in javascript
 
 ---
 
-#### TYPE 1:
+#### Type 1:
 >**Messages**
 
 `theglassfiles_com/app/assets/stylesheets/application.css.scss`
