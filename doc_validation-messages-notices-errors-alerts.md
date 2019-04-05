@@ -93,7 +93,7 @@ en:
               blank: "is required "
 ```
 
-**Devise Errors**
+**Devise Errors**  
 `theglassfiles_com/config/locales/devise.en.yml`  
 `theglassfiles_com/app/views/devise/registrations/new.html.haml`
 
