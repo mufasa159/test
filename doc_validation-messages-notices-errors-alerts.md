@@ -284,18 +284,18 @@ show_error = function (message) {
 
 ---
 ### SUCCESS AND NOTICE DISPLAY
- * [`assets / javascripts / manage`](#assets/javascript/manage)
- * [`assets / javascripts / create_groups`]()
- * [`controllers / users / registrations`]()
- * [`controllers / media_items`]()
- * [`controllers / accounts`]()
- * [`controllers / groups`]()
- * [`controllers / images`]()
- * [`controllers / writings`]()
- * [`views / browse / index`]()
- * [`views / manage / manage families`]()
- * [`views / manage / manage items`]()
- * [`views / manage / manage accounts`]()
+ * assets / javascripts / manage
+ * assets / javascripts / create_groups
+ * controllers / users / registrations
+ * controllers / media_items
+ * controllers / accounts
+ * controllers / groups
+ * controllers / images
+ * controllers / writings
+ * views / browse / index
+ * views / manage / manage families
+ * views / manage / manage items
+ * views / manage / manage accounts
 
 **To Render Messages**  
   The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
