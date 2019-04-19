@@ -295,7 +295,7 @@ show_error = function (message) {
  * views / browse / index
  * views / manage / manage families
  * views / manage / manage items
- * views / manage / manage accounts
+ * `views / manage / manage accounts`
 
 **To Render Messages**  
   The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
