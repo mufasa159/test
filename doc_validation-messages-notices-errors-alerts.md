@@ -332,7 +332,7 @@ In some cases, it is possible that there will be two flash messages displayed on
 
 =============================
 
-###### `assets / javascripts / manage`
+##### `assets / javascripts / manage`
 
 ```
 var ERROR_EMAIL_INVALID       = "Email address is not a valid email address";
