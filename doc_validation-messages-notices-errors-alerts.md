@@ -38,31 +38,31 @@ flash a message saying **Your item was removed from the Community,** when a user
 // message, notice, error display
 ```
 ```
-#flash_success {
-  margin: 70px 15px 0 15px;
-  text-align: center;
-  background-color: $green-dark_color;
-  color: $white_color;
-  font-size: 30px;
+#flash_success { 
+	background-color: $green-dark_color;
+	color: $white_color;
+	a {
+		color: $white_color;
+		text-decoration: underline;
+	}
 }
 ```
 
 ```
 #flash_notice {
-  margin: 70px 0 0 0;
-  text-align: center;
-  background-color: $green-dark_color;
-  color: $white_color;
-  font-size: 30px;
+	@extend #flash_success;
 }
 ```
 
 ```
-#flash_alert {
-  margin: 70px 0 0 0;
-  text-align: center;
-  color: red;
-  font-size: 30px;
+#flash_guidance {
+	@extend #flash_success;
+}
+```
+
+```
+#flash_alert { 
+	color: red;
 }
 ```
 
@@ -83,14 +83,22 @@ en:
         user:
           attributes:
             name_first:
-              blank: "is required "
+              blank: "is required"
             email:
-              blank: "is required "
-              invalid: "is not valid"
+              blank: "is required"
+              invalid: "is not a valid email address"
+              taken: "already belongs to a member of The Glass Files"
             password:
-              blank: "is required "
+              blank: "is required"
+              too_short: "is too short: the required minimum is 8 characters"
             password_confirmation:
-              blank: "is required "
+              confirmation: "does not match password"
+        group:
+          attributes:
+            name:
+              blank: "is required"
+            town:
+              blank: "is required"
 ```
 
 **Devise Errors**  
@@ -109,33 +117,30 @@ en:
 
 ``` 
 def update_email
-  
-  if @user.errors.any?
-      
-      flash[:notice] = 'You updated your email successfully.'
-      redirect_to change_email_path
-    else
-      flash[:notice] = 'Verify your information and try again.'
-      render 'edit_email'
-      #redirect_to profile_path
-      #redirect_to change_email_path
-    
+  new_email = params[:user][:email]
+
+  # current_user.password_bypass = true
+
+  if current_user.update_without_password(email: new_email)
+    # sign_in current_user, bypass: true
+    flash[:success] = 'Your email address was changed successfully.'
+    redirect_to manage_accounts_path
+  else
+    current_user.reload
+    render :edit_email
   end
-  
 end
 ```
 
 ```
 def update_password
-
-  if @user.errors.any?
-      
-      flash[:notice] = 'Verify your information and try again.'
-      redirect_to change_email_path
-    else
-      flash[:notice] = 'You updated your password successfully.'
-      render :edit_email
-
+  if current_user.update_with_password(update_password_params)
+    sign_in current_user, bypass: true
+    flash[:success] = 'Your password was changed successfully.'
+    redirect_to manage_accounts_path
+  else
+    current_user.reload
+    render :edit_password
   end
 end
 ```
@@ -151,29 +156,34 @@ validates_presence_of :name_first
 `theglassfiles_com/app/views/devise/sessions/new.html.haml`
 
 ``` 
-= bootstrap_form_for(resource,
-                    :as => resource_name,
-                    :url => session_path(resource_name),
-                    :html => {:class => 'form-vertical' },
+= bootstrap_form_for(resource, 
+                    :as => resource_name, 
+                    :url => session_path(resource_name), 
+                    :html => {:class => 'form-vertical' }, 
                     :inline_errors => true) do |f|
 
-    %h3                              
-        = render 'layouts/messages' 
-        = devise_error_messages! 
-                                                               
-    = f.email_field :email, autofocus: true, label: "Email address"
-    
-    = f.password_field :password
-    
-    /= f.error_summary
-    
-    /= f.check_box :remember_me                    
-    
-    = f.content_tag :div, "", class: 'container_button' do 
-        = f.submit 'Enter', class: "btn btn-md btn-primary"
-        = f.content_tag :div, raw("If you've lost your password, you can #{ link_to "reset your password here",  new_password_path(resource_name), class: 'turn_bold' }."), class: 'button_disclaimer'
+      = f.email_field :email, autofocus: true, label: "Email address"
+      
+      = f.password_field :password
+      
+      /= f.error_summary
+      
+      /= f.check_box :remember_me                    
+      
+      = f.content_tag :div, "", class: 'container_button' do 
+          .btn-group
+              = f.submit 'Enter', class: "btn btn-md btn-primary"
 
-    /= @user.errors.full_messages                
+              %a{:href => "/auth/facebook"}
+                  .btn.btn-md.btn-secondary{style: "padding: 6px 6px; font-size: 20px;"}
+                      Enter with Facebook
+              %a{:href => "/auth/google"}
+                  .btn.btn-md.btn-secondary{style: "padding: 6px 6px; font-size: 20px;"}
+                      Enter with Google
+
+          = f.content_tag :div, raw("If you've lost your password, you can #{ link_to "reset your password here",  new_password_path(resource_name), class: 'turn_bold' }.<br>To create your free Personal account, #{ link_to "click here to register", new_registration_path(resource_name), class: 'turn_bold' }."), class: 'button_disclaimer'
+
+      /= @user.errors.full_messages               
 ```
 
 ---
@@ -181,17 +191,15 @@ validates_presence_of :name_first
 ### TYPE 3:
 >**Starts in javascript, ends in javascript**
 
-`theglassfiles_com/app/assets/javascripts/create_images.js`
+`theglassfiles_com/app/assets/javascripts/images.js`
 
 ```
   function display_error(label_for, error_text) {
-    var label = $("[for='"+label_for+"']");
+    var label = $("[for='" + label_for + "']");
     var error_message = label.text().split(" - ")[0] + " - " + error_text;
-
     label.parent().addClass('has-error');
     label.text(error_message);
-
-    scrollTo(label);  
+    scrollTo(label);
   }
 ```
 
