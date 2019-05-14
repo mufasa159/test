@@ -664,7 +664,6 @@ manage_families
 
 ```
 tag
-
       flash[:notice] = "There are no items with the tag you selected."
 ```
 
