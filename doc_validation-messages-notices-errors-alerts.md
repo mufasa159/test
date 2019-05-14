@@ -205,36 +205,37 @@ validates_presence_of :name_first
 
 ```
   //form front-end validation
-  function validate_form(){
-    var invalid = []
-    
-    invalid[0] = validate_file_presence();
-    invalid[1] = validate_description();
-    // invalid[2] = validate_input_file_type();  
+  function validate_form() {
+    var invalid = [];
+    invalid[1] = validate_description_short();
+    setTimeout(function() {
+      invalid[0] = validate_file_presence();
+    }, 1450);
+    // invalid[2] = validate_input_file_type();
     // invalid[3] = validate_input_file_size();
-
     return invalid;
-  }
+}
 ```
 
 ```
   function validate_description() {
-    if ($('#image_description').val() === '' ){
-      display_error(LABEL_DESCRIPTION, ERROR_DESCRIPTION_REQUIRED);    
+    if ($('#image_description').val().length > 10000) {
+      display_error(LABEL_DESCRIPTION, ERROR_DESCRIPTION_TOO_LONG);
       return false;
     }
+
     clear_error(LABEL_DESCRIPTION);
     return true;
   }
 ```
 
 ```
-  $('#image_description').parent().focusout(function (){
-    if (validate_description()){
-      clear_file_input(original_file_input);
+  $('#image_description').parent().focusout(function() {
+    if (validate_description()) {
       clear_error(LABEL_ORIGINAL)
-      $('#image_description').parent().removeClass('has-error');    
+      $('#image_description').parent().removeClass('has-error');
     }
+  });
 ```
 
 ---
@@ -246,54 +247,38 @@ validates_presence_of :name_first
 `theglassfiles_com/app/views/groups/new.html.haml`
 
 ```
-= bootstrap_nested_form_for(@account, url: groups_path(@group), id: 'new_account') do |f|        
-  
-  = f.fields_for :group, Group.new do |g|
-    = g.text_field :name, :required => true, label: "Family name"
-   
-    = g.text_field :town, :required => true, label: "Town of Family origin", help: raw("A place that is very important to your family history. This could be a place of family gathering, or a<br> town where many family members live or are originally from.<br> <span class='turn_italic'>Examples:</span><br><span class='turn_bold'>Springfield, MA, USA</span><br><span class='turn_bold'>Timbuktu, Mali</span>")          
-  = f.content_tag :div, class: 'form-group' do
-    = image_tag("icons_payment_methods.png", style: "width: 690px;") 
+= bootstrap_nested_form_for @account, url: groups_path(@group), html: {id: 'account'}, label_errors: true do |f|        
+        
+      = f.fields_for :group, Group.new, label_errors: true do |g|
+
+        = g.text_field :name, maxlength: 30, autofocus: false, label: "Family name", class: "control-label required", placeholder: "Family name"
+        
+        = g.text_field :town, maxlength: 51, placeholder: "example: The Bronx, NY, USA", autofocus: false, label: "Town of Family origin", help: raw("A place that is very important to your family history. This could be a place of family gathering, or a<br> town where many family members live or are originally from.<br> <span class='turn_italic'>Examples:</span><br><span class='turn_bold'>Springfield, MA, USA</span><br><span class='turn_bold'>Timbuktu, Mali</span>")          
+
+      .container_payment_options
+        #account_payment_plan.control-label
+          * Select your payment option:
+        
+        = f.content_tag :div, class: 'container_checkbox' do
+          = f.content_tag :div, class: 'form-check' do
+            = radio_button("account", "payment_method", "monthly")
+          = f.content_tag :label, raw("Pay <span class='turn_bold paint_red'>$2</span> <span class='turn_bold'>every month</span>"), for: "account_payment_method_monthly"
+
+        = f.content_tag :div, class: 'container_checkbox' do
+          = f.content_tag :div, class: 'form-check' do
+            = radio_button("account", "payment_method", "one-time", { checked: "checked" })
+          = f.content_tag :label, raw("Pay <span class='turn_bold paint_red'>$90</span> <span class='turn_bold'>once</span> for eternal access"), for: "account_payment_method_one-time"
+
+      = f.content_tag :div, class: 'form-group' do
+        = image_tag("icons_payment_methods.png", style: "width: 690px;", alt: "Security certificate || The Glass Files") 
 
 
-#flash-messages
-```
+      #flash-messages
+``` 
 
-`theglassfiles_com/app/assets/javascripts/form.js`
-
-```
-line 61:
-
-show_error = function (message) {
-  $("#flash-messages").html('<div class="alert-alert"><a data-dismiss="alert">×</a><div id="flash_alert">' + 'There is a problem. Please check entries' + '</div></div>');
-  
-   //document.getElementById("form_description").style.color = "blue";
-
-   document.getElementById("credit_card_number").style.color = "#ff0000";
-   document.getElementsByTagName("label").style.color = "#ff0000";
-   document.getElementById("credit_card_name").style.color = "#ff0000";
-   document.getElementById("credit_card_zip").style.color = "#ff0000";
-   document.getElementById("credit_card_exp_month").style.color = "#ff0000";
-   document.getElementById("credit_card_exp_year").style.color = "#ff0000";
-   document.getElementById("credit_card_code").style.color = "#ff0000";
-   
-  return false;
-};
-```
-
-```
-line 140:
-
-show_error = function (message) {
-  $("#flash-messages").html('<div class="alert-alert"><a data-dismiss="alert">×</a><div id="flash_alert">' + message + '</div></div>');
-  return false;
-};
-```
-
----
 ### SUCCESS AND NOTICE DISPLAY
  * `assets / javascripts / manage`
- * `assets / javascripts / create_groups`
+ * `assets / javascripts / groups`
  * `controllers / users / registrations`
  * `controllers / media_items`
  * `controllers / accounts`
@@ -306,29 +291,35 @@ show_error = function (message) {
  * `views / manage / manage accounts`
 
 **To Render Messages**  
-  The partial `app/views/layouts/_messages.html.haml` can be used to display any flash messages you create.
+  The partial `app/views/layouts/_display_messages.html.haml` can be used to display any flash messages you create.
 
 ```
-.container
-    .row
-        .col-xs-12
-             = render 'layouts/messages'
+   = render 'layouts/messages'
 ```
 
-This partial appears below the header. It calls `app/views/layouts/_messages.erb`
+This partial appears below the header. It calls `app/views/layouts/_messages.html.erb`
 
 ```
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
-    <a href="#" data-dismiss="alert" class="close">×</a>
-    <ul>
-      <li>
-        <%= value %>
-      </li>
-    </ul>
-  </div>
-<%# clears the error so it doesn't appear on every subsequent page you go to %>
+<% if flash.any? %>
+<div class="container">
+<% flash.each_with_index do |(key, value), index| %>
+  <% if value.class == Array %>
+    <% value.each do |message| %>
+      <div class="flash_message" id="flash_<%= key %>">
+        <%= message.html_safe %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="flash_message" id="flash_<%= key %>">
+      <%= value.html_safe %>
+    </div>
+  <% end %>
+
+  <%# clears the error so it doesn't appear on every subsequent page you go to %>
   <% flash.clear%>
+
+<% end %>
+</div>
 <% end %>
 ```
 
@@ -343,93 +334,82 @@ In some cases, it is possible that there will be two flash messages displayed on
 ##### `assets / javascripts / manage`
 
 ```
-var ERROR_EMAIL_INVALID       = "Email address is not a valid email address";
+var ERROR_EMAIL_INVALID = "Email address is not a valid email address";
 
-
-// manage families view members 
-function handle_role_click(role_button, group_id, member_id, role) {
-        
-    if ($(role_button).hasClass("js_member")) 
-    { 
-      grant_role_ajax(role_button, group_id, member_id, role);
-    }
-    else {      
-      
+// manage families view members
+function handle_role_click(role_button, group_id, member_id, role, url) {
+  if ($(role_button).hasClass("js_member")) grant_role_ajax(role_button, group_id, member_id, role, url);
+  else {
       var r = confirm("Are you sure you want to proceed?");
-      if (r == true) {
-        revoke_role_ajax(role_button, group_id, member_id, role);
-      } 
-      else {
-        console.log("cancel")
-      }       
-    }
+
+      if (r == true) revoke_role_ajax(role_button, group_id, member_id, role, url);
+  }
 }
 ```
 
 ```
-function handle_remove_from_family_click(member_id, html_url) {  
-
+function handle_remove_from_group_click(member_id, html_url) {
   var r = confirm("Are you sure you want to proceed?");
-  if (r == true) {
-    remove_from_family_ajax(member_id, html_url)
-  } 
-  else {
-    console.log("cancel")
-  }   
-
+  if (r == true) remove_from_group_ajax(member_id, html_url);
 }
 ```
 
 ```
-// handle leave family
-function handle_leave_family(leave_action, url, member_id, group_name) {
+// handle leave family or organization
+function handle_leave_group_click(leave_action, url, member_id, group_name) {
   var r = confirm("Are you sure you want to leave this Family?");
-  if (r == true) {
-    leave_family_ajax(leave_action, url, member_id, group_name)
-  } 
-  else {
-    console.log("cancel")
-  } 
-
+  if (r == true) leave_group_ajax(member_id, url);
 }
 ```
 
 ```
-function leave_family_ajax(leave_action, url, member_id, group_name){
-    notice = "You+have+left+the+"+group_name+"+Family."
-
-    link_dirty = window.location.href
-    split_link = link_dirty.split('/')
-    link = split_link[0] + "//" + split_link[2]
-    link += url + "?" + "member_id=" + member_id + "&" + "notice=" + notice
-
-    window.location = link
+function leave_group_ajax(member_id, link) {
+  $.ajax({
+    type: 'DELETE',
+    url: link,
+    data: {
+      member_id: member_id
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+    },
+    success: function(data, a, response_object) {
+      // successful request; do something with the data
+      window.location.replace(response_object.responseText)
+    },
+    error: function() {
+      // failed request; give feedback to user
+    }
+  });
 }
 ```
 
 ```
-// delete item 
-function handle_delete_item(item_id, html_url)
-{
-
+// delete item
+function handle_delete_item(item_id, html_url) {
   var r = confirm("Are you sure you want to delete this media item?");
-  if (r == true) {
-    delete_item_ajax(item_id, html_url)
-  } 
-  else {
-    console.log("cancel")
-  } 
-
+  if (r == true) delete_item_ajax(item_id, html_url);
 }
+
 ```
 
 =============================
 
 
-##### `assets / javascripts / create_groups`
+##### `assets / javascripts / groups`
 ```
-  show_error = function (message) {
-    $("#flash-messages").html('<div id="flash_alert" style="margin-bottom: 60px;">' + 'All entries must be accurate.' + '</div>');
+show_error = function(message) {
+  $("#flash-messages").html('<div id="flash_alert" class="flash_message" style="margin-bottom: 60px;">' + 'All entries must be accurate.' + '</div>');
+  // document.getElementById("form_description").style.color = "blue";
+  // document.getElementById("credit_card_number").style.color = "#ff0000";
+  // document.getElementsByTagName("label").style.color = "#ff0000";
+  // document.getElementById("credit_card_name").style.color = "#ff0000";
+  // document.getElementById("credit_card_zip").style.color = "#ff0000";
+  // document.getElementById("credit_card_exp_date").style.color = "#ff0000";
+  // document.getElementById("credit_card_exp_year").style.color = "#ff0000";
+  // document.getElementById("credit_card_code").style.color = "#ff0000";
+  return false;
+};
 ```
 
 =============================
@@ -481,7 +461,7 @@ update
 
 ```
 destroy
-      flash[:success] = 'You deleted a Family account. Would you like to create a new one?'
+      flash[:success] = 'You deleted a Family account. Would you like to <a href="#{create_families_path}">create a new one</a>?'
 ```
 
 ```
@@ -509,6 +489,11 @@ update_user_name_town
       flash[:success] = 'You changed your Personal account information successfully.'
 ```
 
+```
+update_profile_picture
+      flash[:success] = "Your #{group_id != 0 ? "#{group.group_type}'s " : ""}profile picture was changed successfully."
+```
+
 =============================
 
 
@@ -518,19 +503,55 @@ update_user_name_town
 grant_group_role
 
       if group.add(member, as: role)
-        format.html {render :nothing => true, :notice => 'We sent a notification of your request to #{member.name_first}.'}
-      else  
-        format.html {render nothing: true, notice: "We were not able to fulfill your request. Please notify us of this issue by emailing customerservice@theglassfiles.com"}
+        # Notify this user they made someone a manager.
+        Notification.create(notification_type: :you_designated_them_historian,
+          other_user_id: member.id,
+          group_id: group.id,
+          user_id: current_user.id
+        )
+
+        # Notify the other user they are now a manager.
+        Notification.create(
+          notification_type: :they_designated_you_historian,
+          other_user_id: current_user.id,
+          group_id: group.id,
+          user_id: member.id
+        )
+
+        Mailer.they_designated_you_historian(member, group, current_user).deliver_later
+
+        format.html {render :nothing => true, :notice => 'We sent a notification of your request to #{member.name}.'}
+      else
+        flash[:alert] = "We were not able to fulfill your request. Please notify us of this issue by emailing <a href='mailto:customerservice@theglassfiles.com'>customerservice@theglassfiles.com</a>"
+        format.html {render nothing: true}
       end
 ```
 
 ```
 revoke_group_role
 
-      if group.users.delete(member, as: role) 
-        format.html {render :nothing => true, :notice => 'We sent a notification of your action to #{member.name_first}.'}
-      else  
-        format.html {render nothing: true, notice: "We were not able to fulfill your request. Please notify us of this issue by emailing customerservice@theglassfiles.com"}
+      if group.users.delete(member, as: role)
+        # Notify this user they revoked someone as manager.
+        Notification.create(
+          notification_type: :you_revoked_them_historian,
+          other_user_id: member.id,
+          group_id: group.id,
+          user_id: current_user.id
+        )
+        # Notify the other user they are no longer a manager.
+        Notification.create(
+          notification_type: :they_revoked_you_historian,
+          other_user_id: current_user.id,
+          group_id: group.id,
+          user_id: member.id
+        )
+
+        Mailer.they_revoked_you_historian(member, group, current_user).deliver_later
+
+        format.html {render :nothing => true, :notice => 'We sent a notification of your action to #{member.name}.'}
+      else
+        flash[:alert] = "Your profile picture was not changed"
+        render manage_accounts_view
       end
 ```
 
@@ -541,20 +562,56 @@ remove_group_user
 
         if member == current_user
           flash[:success] = "You have left the #{group.name} Family."
+          Notification.create(
+            notification_type: :you_left_group,
+            user_id: current_user.id,
+            group_id: group.id
+          )
+
+          # Notify every manager and admin
+          notifications = User.in_group(group).as([:manager, :admin]).map do |user|
+            Notification.new(
+              notification_type: :they_left_group,
+              user_id: user.id,
+              group_id: group.id,
+              other_user_id: member.id
+            )
+          end
+
+          if notifications.any? then Notification.import(notifications, timestamps: false) end
+        
         else
-          flash[:success] = "You removed #{member.name_first} from the #{group.name} Family."
+          flash[:success] = "You removed #{member.name} from the #{group.name} Family."
+          Notification.create(
+            notification_type: :they_removed_you_group,
+            other_user_id: current_user.id,
+            user_id: member.id,
+            group_id: group.id
+          )
+          Mailer.they_removed_you_group(member, group, current_user).deliver_later
+
+          Notification.create(
+            notification_type: :you_removed_them_group,
+            other_user_id: member.id,
+            user_id: current_user.id,
+            group_id: group.id
+          )
+        
         end
 
-        format.html {redirect_to "/manage/families", notice: "You removed #{member.name_first} from the #{group.name} Family."}        
+
+        # format.html {redirect_to "/manage/families", notice: "You removed #{member.name_first} from the #{group.name} Family."}
+        format.html {render text: "#{manage_families_url}"}
       else
-        format.html {redirect_to "/manage/families", alert: "We were not able to fulfill your request. Please notify us of this issue by emailing customerservice@theglassfiles.com"}
+        flash[:alert] = "We were not able to fulfill your request. Please notify us of this issue by emailing <a href='mailto:customerservice@theglassfiles.com'>customerservice@theglassfiles.com</a>"
+        format.html {redirect_to "/manage/families"}
       end
 ```
 
 ```
 create
 
-    respond_to do |format|      
+    respond_to do |format|
       url = manage_families_dynamic_url(@account.group.id, "invite_members", "invitemembers")
       flash[:success] = "You created your Family group successfully! Now <a href='#{url}'>invite members to it</a>."
 
@@ -566,18 +623,39 @@ create
 manage_families
 
     if @form == "view_members"      
+      ifif @form == "view_members"
       if (@curr_group.users(as: :member) +  @curr_group.users(as: :manager) +  @curr_group.users(as: :admin)).count > 1
         @members = @curr_group.get_group_members(current_user)
-      else         
+      else
         respond_to do |format|
           url = manage_families_dynamic_url(@curr_group.id, "invite_members", "invitemembers")
-          flash[:success] = "You don't have any family members yet <a href='#{url}'>Invite members now</a>!"
-          
+          flash[:success] = "You don't have any family members yet. <a href='#{url}'>Invite members now</a>!"
+
           redirect_to manage_families_dynamic_path(@curr_group.id, "invite_members", "")
-          return(0)
-        end        
+          return
+        end
       end
-    elsif @form == "invite_members"
+    elsif @form == "edit_picture"
+      page = [1, group_manage_params[:page].to_i].max
+      all = Group.get_items(g_id, { number_of_items: 60, page: page, user: current_user })
+
+      if all['items'].empty?
+        flash[:notice] = "This Family doesn't have any items yet. <a href=#{manage_default_path}>Share some now</a>!"
+
+        redirect_to manage_families_path(:anchor => "")
+        return
+      else
+        @entries = all['items']
+        @total_pages = all['pages']
+        @curr_page = all['curr_page']
+        @pagination_url_parameters = { form: @form, group_id: g_id }
+        @url_fragment = "changepicture"
+        @is_managing_accounts = false
+
+        @entries.push(Image.new(id: -42, file_original_file_name: "avatar_#{@curr_group.group_type.downcase}_thumbnail.png")) if @curr_page == @total_pages
+      end
+    end
+
 ```
 
 =============================
@@ -626,10 +704,16 @@ historian_update_sharings
 ```
 destroy
 
-    if @image.destroy then
+    if @image.destroy
+      Notification.create(
+        notification_type: :you_deleted_item,
+        user_id: current_user.id,
+        media_type: @image.media_type
+      )
+
       respond_to do |format|
         flash[:success] = 'You have deleted the media item you selected.'
-        format.html { redirect_to images_url, success: 'You have deleted the media item you selected.' }
+        format.html { render text: "#{manage_items_url}", success: 'You have deleted the media item you selected.' }
         format.json { head :no_content }
       end
     else
@@ -676,11 +760,23 @@ historian_update_sharings
 ```
 destroy
 
-    @writing.destroy
-    respond_to do |format|
-      flash[:success] = 'You have deleted the media item you selected.'
-      format.html { redirect_to writings_url, success: 'You have deleted the media item you selected.' }
-      format.json { head :no_content }
+    if @writing.destroy then
+      Notification.create(
+        notification_type: :you_deleted_item,
+        user_id: current_user.id,
+        media_type: @writing.media_type
+      )
+
+      respond_to do |format|
+        flash[:success] = 'You have deleted the media item you selected.'
+        format.html { render text: "#{manage_items_url}", success: 'You have deleted the media item you selected.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to writings_url, alert: 'You do not have permission to delete this media item.' }
+        format.json { head :no_content }
+      end
     end
 ```
 
@@ -739,6 +835,15 @@ Each circle represents a group you're a part of.
 
 #flash_notice
 You haven't created any media items yet. <a href="#{create_items_landing_url}">Create your first item now</a>!
+
+#flash_notice
+You haven't shared any items with the Community.
+
+#flash_notice
+You haven't shared any items with the World.
+
+#flash_notice
+This Family doesn't have any items yet. <a href="#{manage_default_path}">Share some now</a>!
 
 #flash_guidance
 Click or tap a circle to see items you can manage in that group.
